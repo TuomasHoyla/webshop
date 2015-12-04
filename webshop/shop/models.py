@@ -1,5 +1,4 @@
 from __future__ import unicode_literals
-
 from django.db import models
 
 
@@ -12,7 +11,6 @@ class Basket(models.Model):
     product = models.ForeignKey('Product', blank=True)
     
 class Product(models.Model):
-    
     name = models.CharField(max_length=128, unique=True, default="product")
     price = models.IntegerField(default=1)
 
