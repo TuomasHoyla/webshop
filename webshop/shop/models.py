@@ -2,9 +2,8 @@ from __future__ import unicode_literals
 from django.db import models
 
 class Container(models.Model):
-
-    amount = models.IntegerField(default=0)
     product = models.ForeignKey('Product', blank=True)
+    amount = models.IntegerField(default=0)
     
     class Meta:
         abstract = True
