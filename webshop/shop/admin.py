@@ -5,3 +5,4 @@ from models import Catalog, Basket, Product
 admin.site.register(Catalog)
 admin.site.register(Basket)
 admin.site.register(Product)
+#admin.site.register(Container)
