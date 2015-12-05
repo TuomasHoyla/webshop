@@ -13,6 +13,17 @@
         hello world! <strong>{{ boldmessage }}</strong><br />
         <a href="/shop/about/">About</a><br />
         <img src="{% static "images/etusivu_with_logo.png" %}" style="width: 30%; height: 30%" alt="Picture of Rango" /> <!-- New line -->
+        
+        {% if products %}
+            <ul>
+                {% for product in products %}
+                <li>{{ product.name }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There are no categories present.</strong>
+        {% endif %}
+        
     </body>
 
 </html>
