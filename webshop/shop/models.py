@@ -32,3 +32,7 @@ class Product(models.Model):
     def __unicode__(self):  #For Python 2, use __str__ on Python 3
         return self.name
 
+#adding/removing/editing products in Catalog & Basket
+#querying products from catalog with pagination, sorting key = name/Price
+#querying products from catalog, Grouping price range (5-10, < 100 etc)
+#querying products from catalog, 

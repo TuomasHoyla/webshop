@@ -10,7 +10,7 @@ from rest_framework.response import Response
 
 from serializers import ProductSerializer, BasketSerializer, CatalogSerializer
 
-
+#GET ITEMS FROM BASKET
 @api_view(['GET', 'POST'])
 def basket(request):
     if request.method == 'GET':
@@ -27,9 +27,6 @@ def basket(request):
         else:
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    
-    
 
 @api_view(['GET', 'POST'])
 def catalog(request):
