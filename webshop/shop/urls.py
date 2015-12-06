@@ -10,6 +10,10 @@ urlpatterns = [
     #(r'^v1/(?P<variable_a>(\d+))/(?P<variable_b>(\d+))/$', r'custom1.views.v1')
     #url((r'^removefrombasket/(\d+)/(\d+)/$', views.removeFromBasket, name='addtobasket')),
     url(r'^removefrombasket/(\d+)/(\d+)/$', views.removeFromBasket, name='removefrombasket'),
+
+    url(r'^basket/$', views.basket, name='basket'),
+    url(r'^catalog/$', views.catalog, name='catalog'),
+    url(r'^products/(?P<pk>[0-9]+)$', views.product_detail, name='product_detail'),
 ]
 
 

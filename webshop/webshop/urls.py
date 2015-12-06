@@ -21,4 +21,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^shop/', include('shop.urls')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+  #  url(r'^tasks/$', 'task_list', name='task_list'),
+#    url(r'^tasks/(?P<pk>[0-9]+)$', 'task_detail', name='task_detail'),
 ]

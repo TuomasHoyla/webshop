@@ -4,7 +4,76 @@ from django.http import HttpResponse
 from django.views.generic import View
 from shop.models import Product, Basket, Catalog
 from django.core import serializers
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
+from serializers import ProductSerializer, BasketSerializer, CatalogSerializer
+
+
+@api_view(['GET', 'POST'])
+def basket(request):
+    if request.method == 'GET':
+        tasks = Basket.objects.all()
+        #kuinka saada product.name mukaan
+        serializer = BasketSerializer(tasks, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = BasketSerializer(data=request.DATA)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(
+                serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    
+    
+
+@api_view(['GET', 'POST'])
+def catalog(request):
+    if request.method == 'GET':
+        tasks = Catalog.objects.all()
+        serializer = CatalogSerializer(tasks, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = CatalogSerializer(data=request.DATA)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(
+                serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def product_detail(request, pk):
+    """
+    Get, udpate, or delete a specific task
+    """
+    try:
+        task = Product.objects.get(pk=pk)
+    except Product.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = ProductSerializer(task)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = ProductSerializer(task, data=request.DATA)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(
+                serilizer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        task.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 def index(request):
